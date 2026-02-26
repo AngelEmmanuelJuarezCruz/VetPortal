@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Mail;
+
+use App\Models\Cita;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class AppointmentReminder extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public Cita $appointment;
+
+    public function __construct(Cita $appointment)
+    {
+        $this->appointment = $appointment;
+    }
+
+    public function build()
+    {
+        return $this->subject('Recordatorio de cita')
+            ->view('emails.appointments.reminder')
+            ->with(['appointment' => $this->appointment]);
+    }
+}
