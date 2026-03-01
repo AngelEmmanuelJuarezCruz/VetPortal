@@ -30,7 +30,7 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('dashboard');
     }
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // Tenant creation routes (require authentication but not tenant)
